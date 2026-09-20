@@ -4,6 +4,8 @@ import { Routes, Route, Link, useLocation } from "react-router-dom";
 import Contact from "./Contact";
 import ServiceArea from "./ServiceArea";
 import CustomCursor from "./components/CustomCursor";
+import Architecture from "./pages/Architecture";
+import Construction from "./pages/Construction";
 import Hero from "./components/Hero";
 import {
   completedProjects,
@@ -64,7 +66,8 @@ function FacebookIcon({ className = "h-4 w-4", ...props }) {
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
+  { label: "Architecture Design", href: "/architecture" },
+  { label: "Construction Projects", href: "/construction" },
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
 ];
@@ -171,10 +174,10 @@ function Section({ id, className = "", children }) {
 function Reveal({ children, className = "", delay = 0, amount = 0.25 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 34 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount }}
-      transition={{ ...spring, delay }}
+      transition={{ duration: 0.6, delay }}
       className={className}
     >
       {children}
@@ -305,12 +308,14 @@ function Navbar() {
             >
               <FacebookIcon className="h-4 w-4" />
             </a>
-            <Link
-              to="/contact"
-              className="rounded-md bg-white px-5 py-2.5 text-sm font-bold text-black transition-colors hover:bg-neutral-200 cursor-pointer"
-            >
-              Get Started
-            </Link>
+            <motion.div whileHover={{ scale: 1.02 }}>
+              <Link
+                to="/contact"
+                className="rounded-md bg-white px-5 py-2.5 text-sm font-bold text-black transition-all duration-200 hover:bg-neutral-200 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] cursor-pointer"
+              >
+                Get Started
+              </Link>
+            </motion.div>
           </div>
 
           {/* Mobile hamburger / close toggle */}
@@ -827,7 +832,8 @@ function Services() {
     <Section id="services" className="bg-black px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <Reveal>
-          <div className="mb-12 grid gap-6 lg:grid-cols-[0.9fr_1fr] lg:items-end">
+          <div className="relative mb-12 grid gap-6 lg:grid-cols-[0.9fr_1fr] lg:items-end">
+            <div className="absolute left-0 top-1/2 -z-10 h-32 w-64 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08),transparent_70%)] blur-2xl" />
             <h2 className="text-5xl font-black leading-none tracking-tighter text-white sm:text-6xl md:text-7xl">
               Services we provide
             </h2>
@@ -844,7 +850,10 @@ function Services() {
 
             return (
               <Reveal key={service.title} delay={index * 0.06}>
-                <article className="h-full rounded-lg border border-neutral-800 bg-neutral-950/60 p-7 transition hover:border-neutral-600">
+                <motion.article 
+                  whileHover={{ scale: 1.02 }}
+                  className="h-full rounded-xl border border-neutral-800/80 bg-neutral-950/60 p-7 transition-all duration-300 hover:border-neutral-700 backdrop-blur-sm"
+                >
                   <div className="mb-12 grid h-12 w-12 place-items-center rounded-md border border-neutral-800 bg-black">
                     <Icon className="h-6 w-6 text-white" strokeWidth={1.8} />
                   </div>
@@ -854,7 +863,7 @@ function Services() {
                   <p className="text-base leading-7 text-neutral-400">
                     {service.description}
                   </p>
-                </article>
+                </motion.article>
               </Reveal>
             );
           })}
@@ -869,7 +878,8 @@ function Process() {
     <Section id="process" className="bg-black px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <Reveal>
-          <div className="mb-14 max-w-5xl">
+          <div className="relative mb-14 max-w-5xl">
+            <div className="absolute left-0 top-1/2 -z-10 h-32 w-64 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08),transparent_70%)] blur-2xl" />
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-neutral-500">
               Process
             </p>
@@ -882,7 +892,10 @@ function Process() {
         <div className="grid gap-5 lg:grid-cols-4">
           {processSteps.map((step, index) => (
             <Reveal key={step.title} delay={index * 0.06} amount={0.18}>
-              <article className="relative min-h-80 overflow-hidden rounded-lg border border-neutral-800 bg-neutral-950/60 p-7">
+              <motion.article 
+                whileHover={{ scale: 1.02 }}
+                className="relative min-h-80 overflow-hidden rounded-xl border border-neutral-800/80 bg-neutral-950/60 p-7 transition-all duration-300 hover:border-neutral-700 backdrop-blur-sm"
+              >
                 <p className="absolute -right-3 top-1 text-8xl font-black leading-none tracking-tighter text-white/[0.06]">
                   {step.number}
                 </p>
@@ -893,7 +906,7 @@ function Process() {
                   {step.title}
                 </h3>
                 <p className="text-base leading-7 text-neutral-400">{step.text}</p>
-              </article>
+              </motion.article>
             </Reveal>
           ))}
         </div>
@@ -1015,7 +1028,8 @@ function Testimonials() {
     <Section className="bg-black px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <Reveal>
-          <div className="mb-12 max-w-5xl">
+          <div className="relative mb-12 max-w-5xl">
+            <div className="absolute left-0 top-1/2 -z-10 h-32 w-64 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08),transparent_70%)] blur-2xl" />
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-neutral-500">
               Testimonials
             </p>
@@ -1028,7 +1042,10 @@ function Testimonials() {
         <div className="grid gap-5 md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <Reveal key={testimonial.name} delay={index * 0.06}>
-              <article className="relative h-full rounded-lg border border-neutral-800 bg-neutral-950/60 p-7">
+              <motion.article 
+                whileHover={{ scale: 1.02 }}
+                className="relative h-full rounded-xl border border-neutral-800/80 bg-neutral-950/60 p-7 transition-all duration-300 hover:border-neutral-700 backdrop-blur-sm"
+              >
                 <span className="absolute right-6 top-4 text-7xl font-black leading-none text-white/[0.06]">
                   "
                 </span>
@@ -1048,7 +1065,7 @@ function Testimonials() {
                   <p className="font-bold text-white">{testimonial.name}</p>
                   <p className="mt-1 text-sm text-neutral-500">{testimonial.type}</p>
                 </div>
-              </article>
+              </motion.article>
             </Reveal>
           ))}
         </div>
@@ -1073,13 +1090,15 @@ function CallToAction() {
           </h2>
         </Reveal>
         <Reveal delay={0.08}>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-3 rounded-md bg-black px-8 py-5 text-base font-black text-white transition hover:bg-neutral-800"
-          >
-            Get in Touch
-            <ArrowUpRight className="h-5 w-5" strokeWidth={2} />
-          </Link>
+            <motion.div whileHover={{ scale: 1.02 }}>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-3 rounded-md bg-black px-8 py-5 text-base font-black text-white transition-all duration-200 hover:bg-neutral-800 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+              >
+                Get in Touch
+                <ArrowUpRight className="h-5 w-5" strokeWidth={2} />
+              </Link>
+            </motion.div>
         </Reveal>
       </div>
     </Section>
@@ -1226,7 +1245,8 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/architecture" element={<Architecture />} />
+        <Route path="/construction" element={<Construction />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/contact" element={<Contact />} />

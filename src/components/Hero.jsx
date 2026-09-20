@@ -13,10 +13,10 @@ const spring = {
 function Reveal({ children, className = "", delay = 0, amount = 0.25 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount }}
-      transition={{ ...spring, delay }}
+      transition={{ duration: 0.6, delay }}
       className={className}
     >
       {children}
@@ -81,7 +81,9 @@ export default function Hero() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.08} className="w-full max-w-full overflow-hidden">
+        <Reveal delay={0.08} className="relative w-full max-w-full overflow-hidden">
+          {/* Subtle gradient glow behind headline */}
+          <div className="absolute left-1/2 top-1/2 -z-10 h-32 w-[120%] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.1),transparent_50%)] blur-2xl md:h-48" />
           <h1 className="whitespace-nowrap text-2xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.25rem] leading-none">
             SHREE ARBUDA CONSTRUCTION
           </h1>
@@ -101,26 +103,63 @@ export default function Hero() {
 
         <Reveal delay={0.22} className="mt-9">
           <div className="flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-4">
-            <Link
-              to="/contact"
-              className="group flex min-w-36 items-center justify-center gap-1.5 rounded-md bg-white px-6 py-4 text-sm font-bold text-black transition-all duration-200 hover:bg-neutral-200 sm:min-w-40"
-            >
-              <span>Build With Us</span>
-              <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
-            <Link
-              to="/services"
-              className="min-w-36 rounded-md border border-white/80 bg-black/40 px-6 py-4 text-sm font-bold text-white backdrop-blur-sm transition-all duration-200 hover:border-white hover:bg-white hover:text-black sm:min-w-40"
-            >
-              Our Services
-            </Link>
-            <a
+            <motion.div whileHover={{ scale: 1.02 }}>
+              <Link
+                to="/contact"
+                className="group flex min-w-36 items-center justify-center gap-1.5 rounded-md bg-white px-6 py-4 text-sm font-bold text-black transition-all duration-200 hover:bg-neutral-200 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] sm:min-w-40"
+              >
+                <span>Build With Us</span>
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.02 }}>
+              <Link
+                to="/services"
+                className="min-w-36 rounded-md border border-white/80 bg-black/40 px-6 py-4 text-sm font-bold text-white backdrop-blur-sm transition-all duration-200 hover:border-white hover:bg-white hover:text-black hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] sm:min-w-40"
+              >
+                Our Services
+              </Link>
+            </motion.div>
+          </div>
+        </Reveal>
+
+        {/* Department Contact Buttons */}
+        <Reveal delay={0.28} className="mt-5 w-full max-w-xl">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <motion.a
+              whileHover={{ scale: 1.02 }}
               href="tel:+916375683147"
-              className="flex min-w-36 items-center justify-center gap-2.5 rounded-md border border-white/20 bg-white/10 px-6 py-4 text-sm font-bold text-white backdrop-blur-md transition-all duration-200 hover:scale-105 hover:border-white/40 hover:bg-white/20 sm:min-w-40"
+              className="flex items-center gap-3.5 rounded-xl border border-neutral-800 bg-neutral-900/80 p-3.5 text-left backdrop-blur-md transition-all duration-200 hover:border-indigo-500/50 hover:bg-neutral-800/90 hover:shadow-[0_0_15px_rgba(99,102,241,0.15)]"
             >
-              <Phone className="h-4 w-4 text-white" />
-              <span>+91 63756 83147</span>
-            </a>
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-indigo-500/15 text-indigo-400">
+                <Phone className="h-4.5 w-4.5" />
+              </div>
+              <div>
+                <p className="text-sm font-bold leading-snug text-white">
+                  +91 63756 83147
+                </p>
+                <p className="mt-0.5 text-xs text-neutral-400">
+                  Architecture & 3D Design
+                </p>
+              </div>
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.02 }}
+              href="tel:+918529756391"
+              className="flex items-center gap-3.5 rounded-xl border border-neutral-800 bg-neutral-900/80 p-3.5 text-left backdrop-blur-md transition-all duration-200 hover:border-amber-500/50 hover:bg-neutral-800/90 hover:shadow-[0_0_15px_rgba(245,158,11,0.15)]"
+            >
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-amber-500/15 text-amber-400">
+                <Phone className="h-4.5 w-4.5" />
+              </div>
+              <div>
+                <p className="text-sm font-bold leading-snug text-white">
+                  +91 85297 56391
+                </p>
+                <p className="mt-0.5 text-xs text-neutral-400">
+                  Construction & On-Site Work
+                </p>
+              </div>
+            </motion.a>
           </div>
         </Reveal>
       </div>
