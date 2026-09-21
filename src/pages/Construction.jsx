@@ -60,14 +60,13 @@ function Lightbox({ image, onClose }) {
 // ── WhatsApp helper ─────────────────────────────────────────────────────────
 const CONSTRUCTION_WA_NUMBER = "918529756391";
 
-function buildConstructionWhatsAppUrl({ name, phone, location, scope }) {
+function buildConstructionWhatsAppUrl({ name, phone, location }) {
   const message = [
     `*Construction & On-Site Building Work Inquiry*`,
     ``,
     `Name: ${name}`,
     `Phone: ${phone}`,
     `Construction Location: ${location}`,
-    `Project Scope: ${scope}`,
     ``,
     `Please share property type & estimated timeline details.`,
   ].join("\n");
@@ -82,7 +81,6 @@ export default function Construction() {
     name: "",
     phone: "",
     location: "",
-    scope: "Haweli",
   });
 
   const handleChange = (e) =>
@@ -351,27 +349,6 @@ export default function Construction() {
                 </div>
               </div>
 
-              {/* Project Scope */}
-              <div>
-                <label
-                  htmlFor="con-scope"
-                  className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-neutral-400"
-                >
-                  Project Scope
-                </label>
-                <select
-                  id="con-scope"
-                  name="scope"
-                  value={form.scope}
-                  onChange={handleChange}
-                  className="w-full cursor-pointer rounded-lg border border-neutral-800 bg-black px-4 py-3 text-white outline-none transition focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
-                >
-                  <option value="Haweli">Haweli</option>
-                  <option value="Villa">Villa</option>
-                  <option value="Commercial">Commercial</option>
-                  <option value="Turnkey">Turnkey</option>
-                </select>
-              </div>
 
               {/* Submit */}
               <motion.div whileHover={{ scale: 1.02 }}>

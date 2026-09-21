@@ -66,14 +66,12 @@ function Lightbox({ image, onClose }) {
 // ── WhatsApp helper ─────────────────────────────────────────────────────────
 const ARCHITECTURE_WA_NUMBER = "916375683147";
 
-function buildArchitectureWhatsAppUrl({ name, phone, plotDimensions, service }) {
+function buildArchitectureWhatsAppUrl({ name, phone }) {
   const message = [
     `*Architecture & 2D/3D Design Inquiry*`,
     ``,
     `Name: ${name}`,
     `Phone: ${phone}`,
-    `Plot Size: ${plotDimensions}`,
-    `Service Required: ${service}`,
     ``,
     `Please share layout details and any reference images.`,
   ].join("\n");
@@ -87,8 +85,6 @@ export default function Architecture() {
   const [form, setForm] = useState({
     name: "",
     phone: "",
-    plotDimensions: "",
-    service: "2D Floor Plan",
   });
 
   const handleChange = (e) =>
@@ -268,49 +264,6 @@ export default function Architecture() {
                 />
               </div>
 
-              {/* Plot Dimensions */}
-              <div>
-                <label
-                  htmlFor="arch-plot"
-                  className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-neutral-400"
-                >
-                  Plot Dimensions
-                </label>
-                <div className="relative">
-                  <Ruler className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-600" />
-                  <input
-                    id="arch-plot"
-                    name="plotDimensions"
-                    type="text"
-                    required
-                    value={form.plotDimensions}
-                    onChange={handleChange}
-                    placeholder="e.g. 30×50 ft"
-                    className="w-full rounded-lg border border-neutral-800 bg-black py-3 pl-11 pr-4 text-white placeholder-neutral-600 outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                  />
-                </div>
-              </div>
-
-              {/* Service Required */}
-              <div>
-                <label
-                  htmlFor="arch-service"
-                  className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-neutral-400"
-                >
-                  Service Required
-                </label>
-                <select
-                  id="arch-service"
-                  name="service"
-                  value={form.service}
-                  onChange={handleChange}
-                  className="w-full cursor-pointer rounded-lg border border-neutral-800 bg-black px-4 py-3 text-white outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                >
-                  <option value="2D Floor Plan">2D Floor Plan</option>
-                  <option value="3D Elevation">3D Elevation</option>
-                  <option value="Interior Design">Interior Design</option>
-                </select>
-              </div>
 
               {/* Submit */}
               <motion.div whileHover={{ scale: 1.02 }}>
